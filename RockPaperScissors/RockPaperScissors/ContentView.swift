@@ -223,7 +223,12 @@ struct ContentView: View {
             }
         }
         .alert(answerTitle, isPresented: $showAlert){
-         Button("Continue", action: playTheGame)
+            if repCount == 10 {
+                Button("GAME OVER! New Game", action: playTheGame)
+            }
+            else {
+                Button("Continue", action: playTheGame)
+            }
         }
     }
 }
