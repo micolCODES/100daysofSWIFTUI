@@ -25,11 +25,16 @@ struct ContentView: View {
     func playTheGame() {
         correctAnswer = Int.random(in: 0...2)
         winLose.toggle()
+        if repCount == 10 {
+            repCount = 0
+            score = 0
+        }
     }
 
     func answerTapped(_ buttonTapped: String) {
         //set condition if you need to win or lose
         //if you need to won over the CPU
+        repCount += 1
         if winLose == true {
             //if the correct answer is ROCK, these are the options
             if correctAnswer == 0 {
@@ -44,6 +49,7 @@ struct ContentView: View {
                 } else {
                     //draw and redo
                     answerTitle = "Draw... Try again!"
+                    repCount -= 1
                 }
             }
             //if the correct answer is PAPER, these are the options
@@ -59,6 +65,7 @@ struct ContentView: View {
                 } else {
                     //draw and redo
                     answerTitle = "Draw... Try again!"
+                    repCount -= 1
                 }
             }
             //if the correct answer is SCISSORS, these are the options
@@ -74,6 +81,7 @@ struct ContentView: View {
                 } else {
                     //draw and redo
                     answerTitle = "Draw... Try again!"
+                    repCount -= 1
                 }
                 
             }
@@ -93,6 +101,7 @@ struct ContentView: View {
                 } else {
                     //draw and redo
                     answerTitle = "Draw... Try again!"
+                    repCount -= 1
                 }
             }
             //if the correct answer is PAPER, these are the options
@@ -108,6 +117,7 @@ struct ContentView: View {
                 } else {
                     //draw and redo
                     answerTitle = "Draw... Try again!"
+                    repCount -= 1
                 }
             }
             //if the correct answer is SCISSORS, these are the options
@@ -123,6 +133,7 @@ struct ContentView: View {
                 } else {
                     //draw and redo
                     answerTitle = "Draw... Try again!"
+                    repCount -= 1
                 }
                 
             }
@@ -165,7 +176,8 @@ struct ContentView: View {
                 // VStack with score count
                 VStack {
                     Text("Score")
-                    Text("\(score) / 10")
+                    Text("\(score)")
+                    Text("\(repCount) out of 10")
                 }
                 Spacer()
             }
