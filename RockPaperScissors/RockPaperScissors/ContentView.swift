@@ -148,11 +148,18 @@ struct ContentView: View {
                     .font(.title.weight(.thin))
                 Spacer()
                 //Hstack game with Rock/Paper/Scissor + Win/Lose
-                HStack{
+                HStack(alignment: .lastTextBaseline){
                     Text("\(rockPaperScissorsArray[correctAnswer])")
+                        .font(.system(size: 70))
                     Text(" should ")
+                        .font(.system(size: 15, weight: .light))
                     Text("\(winLose ? "Win" : "Lose")")
+                        .foregroundColor(winLose ? Color.green : Color.red)
+                        .font(.system(size: 25, weight: .light))
                 }
+                .padding()
+                .background(Color(UIColor.lightGray).opacity(0.2))
+                .cornerRadius(25)
                 Spacer()
                 //VStack user with 3 buttoms for options
                 VStack{
@@ -161,24 +168,57 @@ struct ContentView: View {
                         showAlert = true
                         answerTapped("rock")
                     }
+                    .padding()
+                    .background(.white)
+                    .clipShape(Circle())
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 25)
+                            .stroke(Color.gray.opacity(0.2), lineWidth: 5)
+                            )
                     Button("📄") {
                         //some action
                         showAlert = true
                         answerTapped("paper")
-                    }
+                    }.padding()
+                        .background(.white)
+                        .clipShape(Circle())
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 25)
+                            .stroke(Color.gray.opacity(0.2), lineWidth: 5)
+                                )
                     Button("✂️") {
                         //some action
                         showAlert = true
                         answerTapped("scissors")
-                    }
+                    }.padding()
+                        .background(.white)
+                        .clipShape(Circle())
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 25)
+                            .stroke(Color.gray.opacity(0.2), lineWidth: 5)
+                                )
                 }
+                .padding()
+                .font(.system(size: 80))
                 Spacer()
                 // VStack with score count
-                VStack {
-                    Text("Score")
-                    Text("\(score)")
-                    Text("\(repCount) out of 10")
+                VStack(alignment: .leading, spacing: 6) {
+                    HStack {
+                        Text("Score")
+                        Text("\(score)")
+                            .font(.system(size: 15, weight: .medium))
+                    }
+                    HStack {
+                        Text("Rep")
+                        Text("\(repCount)")
+                            .font(.system(size: 15, weight: .medium))
+                        Text("out of 10")
+                    }
                 }
+                .font(.system(size: 15, weight: .light))
+                .padding()
+                .background(Color(UIColor.lightGray).opacity(0.2))
+                .cornerRadius(25)
                 Spacer()
             }
         }
