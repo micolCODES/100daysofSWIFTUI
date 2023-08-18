@@ -11,6 +11,7 @@ struct ContentView: View {
     @State private var wakeUp = defaultWakeTime
     @State private var sleepAmount = 8.0
     @State private var coffeeAmount = 1
+    @State private var timeToSleep = Date.now
     
     @State private var alertTitle = ""
     @State private var alertMessage = ""
@@ -27,30 +28,44 @@ struct ContentView: View {
         NavigationView {
             
             Form {
-                VStack(alignment: .leading, spacing: 0) {
+                Section{
                     Text("When do you want to wake up?")
-                        .font(.headline)
+//                        .font(.headline)
+                        .listRowSeparator(.hidden)
                     DatePicker("Enter wake up time", selection: $wakeUp, displayedComponents: .hourAndMinute)
                         .labelsHidden()
                 }
-                VStack(alignment: .leading, spacing: 0) {
+                Section{
                     Text("How much sleep do you want?")
+                        .listRowSeparator(.hidden)
                     Stepper("\(sleepAmount.formatted()) hours", value: $sleepAmount, in: 4...12, step: 0.25)
                 }
-                VStack(alignment: .leading, spacing: 0) {
-                    Text("How much coffee do you drink?")
-                    Stepper(coffeeAmount == 1 ? "\(coffeeAmount) cup" : "\(coffeeAmount) cups", value: $coffeeAmount, in: 1...20)
+                Section{
+                    Picker("How much coffee do you drink?", selection: $coffeeAmount) {
+                        ForEach(1...20, id: \.self){
+                            Text("\($0)")
+                        }
+                    }
+//                    Text("How much coffee do you drink?")
+//                        .listRowSeparator(.hidden)
+//                    Stepper(coffeeAmount == 1 ? "\(coffeeAmount) cup" : "\(coffeeAmount) cups", value: $coffeeAmount, in: 1...20)
+                }
+                Section {
+                    Text("You need to go to sleep at")
+                        .listRowSeparator(.hidden)
+                    Text("\(timeToSleep.formatted(date: .omitted, time: .shortened))")
+                        .font(.largeTitle)
                 }
             }
             .navigationTitle("BetterRest")
-            .toolbar{
-                Button("Calculate", action: calculateBedtime)
-            }
-            .alert(alertTitle, isPresented: $showingAlert){
-                Button("OK") {}
-            } message: {
-                Text(alertMessage)
-            }
+//            .toolbar{
+//                Button("Calculate", action: calculateBedtime)
+//            }
+//            .alert(alertTitle, isPresented: $showingAlert){
+//                Button("OK") {}
+//            } message: {
+//                Text(alertMessage)
+//            }
         }
         
     }
@@ -66,10 +81,11 @@ struct ContentView: View {
             
             let prediction = try model.prediction(wake: Double(hour + minute), estimatedSleep: sleepAmount, coffee: Double(coffeeAmount))
             
-            let sleepTime = wakeUp - prediction.actualSleep
-            //more code goes here
-            alertTitle = "You ideal bedtime is "
-            alertMessage = sleepTime.formatted(date: .omitted, time: .shortened)
+            timeToSleep = wakeUp - prediction.actualSleep
+            
+//            let sleepTime = wakeUp - prediction.actualSleep
+//            alertTitle = "You ideal bedtime is "
+//            alertMessage = sleepTime.formatted(date: .omitted, time: .shortened)
         } catch {
             //Something went wrong
             alertTitle = "Error"
