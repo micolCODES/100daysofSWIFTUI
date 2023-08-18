@@ -14,6 +14,7 @@
 		B2419EA12A8F6DCE006A0FE6 /* BetterRestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2419EA02A8F6DCE006A0FE6 /* BetterRestTests.swift */; };
 		B2419EAB2A8F6DCE006A0FE6 /* BetterRestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2419EAA2A8F6DCE006A0FE6 /* BetterRestUITests.swift */; };
 		B2419EAD2A8F6DCE006A0FE6 /* BetterRestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2419EAC2A8F6DCE006A0FE6 /* BetterRestUITestsLaunchTests.swift */; };
+		B2419EBA2A8FC46D006A0FE6 /* SleepCalculator.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = B2419EB92A8FC46D006A0FE6 /* SleepCalculator.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		B2419EA62A8F6DCE006A0FE6 /* BetterRestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BetterRestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2419EAA2A8F6DCE006A0FE6 /* BetterRestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterRestUITests.swift; sourceTree = "<group>"; };
 		B2419EAC2A8F6DCE006A0FE6 /* BetterRestUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterRestUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B2419EB92A8FC46D006A0FE6 /* SleepCalculator.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SleepCalculator.mlmodel; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				B2419E8E2A8F6DCD006A0FE6 /* BetterRestApp.swift */,
+				B2419EB92A8FC46D006A0FE6 /* SleepCalculator.mlmodel */,
 				B2419E902A8F6DCD006A0FE6 /* ContentView.swift */,
 				B2419E922A8F6DCE006A0FE6 /* Assets.xcassets */,
 				B2419E942A8F6DCE006A0FE6 /* BetterRest.entitlements */,
@@ -259,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2419EBA2A8FC46D006A0FE6 /* SleepCalculator.mlmodel in Sources */,
 				B2419E912A8F6DCD006A0FE6 /* ContentView.swift in Sources */,
 				B2419E8F2A8F6DCD006A0FE6 /* BetterRestApp.swift in Sources */,
 			);
