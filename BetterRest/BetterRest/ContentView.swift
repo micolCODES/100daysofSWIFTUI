@@ -26,7 +26,6 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            
             Form {
                 Section{
                     Text("When do you want to wake up?")
