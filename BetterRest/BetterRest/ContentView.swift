@@ -8,24 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var sleepAmount = 8.0
     @State private var wakeUp = Date.now
+    @State private var sleepAmount = 8.0
+    @State private var coffeeAmount = 1
     
     var body: some View {
-        VStack {
-            
-            
-//            Text(Date.now, format: .dateTime.hour().minute())
-//            Text(Date.now, format: .dateTime.day().month().year())
-//            Text(Date.now.formatted(date: .long, time: .shortened))
-//            Stepper("\(sleepAmount.formatted()) hour", value: $sleepAmount, in: 4...12, step: 0.25)
-//            DatePicker("DatePicker 1", selection: $wakeUp, displayedComponents: .hourAndMinute)
-//            DatePicker("DatePicker 2", selection: $wakeUp, in: Date.now...)
-                //.labelsHidden()
+        NavigationView {
+            VStack {
+                Text("When do you want to wake up?")
+                    .font(.headline)
+                DatePicker("Enter wake up time", selection: $wakeUp, displayedComponents: .hourAndMinute)
+                    .labelsHidden()
+                Text("How much sleep do you want?")
+                Stepper("\(sleepAmount.formatted()) hours", value: $sleepAmount, in: 4...12, step: 0.25)
+                Text("How much coffee do you drink?")
+                Stepper(coffeeAmount == 1 ? "\(coffeeAmount) cup" : "\(coffeeAmount) cups", value: $coffeeAmount, in: 1...20)
+            }
+            .navigationTitle("BetterRest")
+            .toolbar{
+                //Button("Calculate")
         }
-        .padding()
     }
-
 }
 
 struct ContentView_Previews: PreviewProvider {
