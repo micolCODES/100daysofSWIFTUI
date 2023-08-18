@@ -13,17 +13,17 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Stepper("\(sleepAmount.formatted()) hour", value: $sleepAmount, in: 4...12, step: 0.25)
-            DatePicker("DatePicker 1", selection: $wakeUp, displayedComponents: .hourAndMinute)
-            DatePicker("DatePicker 2", selection: $wakeUp, in: Date.now...)
+            Text(Date.now, format: .dateTime.hour().minute())
+            Text(Date.now, format: .dateTime.day().month().year())
+            Text(Date.now.formatted(date: .long, time: .shortened))
+//            Stepper("\(sleepAmount.formatted()) hour", value: $sleepAmount, in: 4...12, step: 0.25)
+//            DatePicker("DatePicker 1", selection: $wakeUp, displayedComponents: .hourAndMinute)
+//            DatePicker("DatePicker 2", selection: $wakeUp, in: Date.now...)
                 //.labelsHidden()
         }
         .padding()
     }
-    func exampleDate() {
-        let tomorrow = Date.now.addingTimeInterval(86400)
-        let range = Date.now...tomorrow
-    }
+
 }
 
 struct ContentView_Previews: PreviewProvider {
