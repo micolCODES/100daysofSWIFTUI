@@ -12,6 +12,15 @@ struct ContentView: View {
         Text("Hello, world!")
             .padding()
     }
+    
+    func loadFile() {
+        if let fileURL = Bundle.main.url(forResource: "some-file", withExtension: "txt"){
+            //this works if file was found
+            if let fileContents = try? String(contentsOf: fileURL){
+                //loads file into a String
+            }
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
