@@ -8,29 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var animationAmuont = 1.0
+    @State private var animationAmuont = 0.0
     
     var body: some View {
-        print(animationAmuont)
-        
-        return VStack {
-            Stepper("Scale amount", value: $animationAmuont.animation(
-                .easeInOut(duration: 1)
-                .repeatCount(2, autoreverses: true)
-            ), in: 1...10)
-            
-            Spacer()
-            
-            Button("Tap me") {
-                animationAmuont += 1
+        Button("Tap me") {
+            withAnimation(.interpolatingSpring(stiffness: 5, damping: 1)) {
+                animationAmuont += -360
             }
-            .padding(50)
-            .background(.red)
-            .foregroundColor(.white)
-            .clipShape(Circle())
-            .scaleEffect(animationAmuont)
         }
-            
+        .padding(50)
+        .background(.red)
+        .foregroundColor(.white)
+        .clipShape(Circle())
+        .rotation3DEffect(.degrees(animationAmuont), axis: (x:0, y:0, z:1))
     }
 }
 
