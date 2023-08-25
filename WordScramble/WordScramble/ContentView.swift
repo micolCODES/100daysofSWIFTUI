@@ -11,6 +11,7 @@ struct ContentView: View {
     @State private var usedWords = [String]()
     @State private var rootWord = ""
     @State private var newWord = ""
+    @State private var score = 0
     
     @State private var errorTitle = ""
     @State private var errorMessage = ""
@@ -18,30 +19,37 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            List {
-                Section {
-                    TextField("Enter your word", text: $newWord)
-                        .autocapitalization(.none)
-                }
-                Section {
-                    ForEach(usedWords, id: \.self) {
-                        word in
-                        HStack{
-                            Image(systemName: "\(word.count).circle")
-                            Text(word)
+                List {
+                    Section {
+                        TextField("Enter your word", text: $newWord)
+                            .autocapitalization(.none)
+                    }
+                    Section {
+                        ForEach(usedWords, id: \.self) {
+                            word in
+                            HStack{
+                                Image(systemName: "\(word.count).circle")
+                                Text(word)
+                            }
                         }
                     }
                 }
-            }
-            .navigationTitle(rootWord)
-            .onSubmit(addNewWord)
-            .onAppear(perform: startGame)
-            .alert(errorTitle, isPresented: $showingError) {
-                Button("Ok", role: .cancel) {}
-                
-            } message: {
+                .navigationTitle(rootWord)
+                .toolbar {                    ToolbarItem{
+                        Text("Score: \(score)")
+                    }
+                    ToolbarItem(placement: .bottomBar){
+                        Button("New Word", action: startGame)}
+
+                }
+                .onSubmit(addNewWord)
+                //function plays when view is shown
+                .onAppear(perform: startGame)
+                .alert(errorTitle, isPresented: $showingError) {
+                    Button("Ok", role: .cancel) {}
+                } message: {
                     Text(errorMessage)
-            }
+                }
         }
     }
     
@@ -64,11 +72,20 @@ struct ContentView: View {
             return
         }
         
+        guard isLongEnough(word: answer) else {
+            wordError(title: "Word is too short", message: "You need a word with al least 3 letters")
+            return
+        }
+        
+        guard isStartWord(word: answer) else {
+            wordError(title: "Word is the start word", message: "You cannot use your start word as an answer 😏")
+            return
+        }
+        
         withAnimation {
             usedWords.insert(answer, at: 0)
         }
-        
-        //  usedWords.insert(answer, at: 0)
+        score += newWord.count
         newWord = ""
     }
     
@@ -77,11 +94,15 @@ struct ContentView: View {
             if let startWords = try? String(contentsOf: startWordsURL) {
                 let allWords = startWords.components(separatedBy: "\n")
                 rootWord = allWords.randomElement() ?? "silkworm"
+                usedWords = [String]()
+                score = 0
                 return
             }
         }
         fatalError("Could not load start.txt from bundle")
     }
+    
+    //check if word has been used or not
     func isOriginal(word: String) -> Bool {
         !usedWords.contains(word)
     }
@@ -104,6 +125,16 @@ struct ContentView: View {
         let range = NSRange(location: 0, length: word.utf16.count)
         let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
         return misspelledRange.location == NSNotFound
+    }
+    
+    func isLongEnough(word: String) -> Bool {
+        let returnBool = word.count > 2 ? true : false
+        return returnBool
+    }
+    
+    func isStartWord(word: String) -> Bool {
+        let returnBool = word != rootWord ? true : false
+        return returnBool
     }
     
     func wordError(title: String, message: String) {
