@@ -8,14 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var animationAmuont = 1.0
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        Button("Tap me"){
+            //jumpy animation, in clear steps
+            animationAmuont += 1
         }
-        .padding()
+            .padding(50)
+            .background(.red)
+            .foregroundColor(.white)
+            .clipShape(Circle())
+            .scaleEffect(animationAmuont)
+            .blur(radius: (animationAmuont - 1 ) * 3)
+        //smooth animation
+            .animation(.default, value: animationAmuont)
     }
 }
 
