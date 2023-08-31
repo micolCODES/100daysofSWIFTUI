@@ -26,18 +26,19 @@ struct ContentView: View {
     @State private var typedAnswer = 0
     @State private var score = 0
     @State private var questionNumber = 1
-    @State private var gameStarted = false
-    @State private var showGame = false
+    @State private var setUpView = true
+    @State private var gameView = false
+    @State private var gameOverView = false
     
     var multiplierBank = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     var multiplicationTable = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-    var questionOptions = [5, 10, 15, 20]
+    var questionOptions = [1, 5, 10, 15, 20]
     
     
     var body: some View {
         NavigationView {
             VStack {
-                if showGame == false {
+                if setUpView {
                 //select which multiplication tables you want
                 Spacer()
                 Text("Pick a multiplication table")
@@ -66,24 +67,22 @@ struct ContentView: View {
                 Spacer()
                 Button {
                     playGame()
-                    gameStarted.toggle()
                 } label: {
                     Text("Play Game")
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(PlayGameButton())
+                Spacer()
             }
-                
-            Spacer()
                 //This group should only show after you hit "Play Game" button
                 VStack {
-                    if showGame {
+                    if gameView {
                         
                         Text("Question # \(questionNumber)")
                             .font(.title)
                             .fontWeight(.thin)
                         Spacer()
-                        Text("\(selectedNumber) x \(gameStarted ? questionBank[questionNumber] : questionBank[0])")
+                        Text("\(selectedNumber) x \(gameView ? questionBank[questionNumber] : questionBank[0])")
                             .font(Font.system(size: 50))
                             .foregroundColor((Color(red: 98/255, green: 123/255, blue: 87/255)))
                         Spacer()
@@ -104,6 +103,31 @@ struct ContentView: View {
                     }
                 }
                 //alert to end game and play a new one
+                VStack {
+                    if gameOverView {
+                        Spacer()
+                        Text("Game Over!")
+                            .font(.title)
+                            .fontWeight(.medium)
+                        Spacer()
+                        Text("Your score is")
+                            .font(.title)
+                            .fontWeight(.thin)
+                        Text("\(score)")
+                            .font(Font.system(size: 100))
+                            .foregroundColor((Color(red: 98/255, green: 123/255, blue: 87/255)))
+                            .padding()
+                        Text("out of \(howManyQuestions)")
+                            .font(.title)
+                            .fontWeight(.thin)
+                        Spacer()
+                        Button("Play Again"){
+                            playagain()
+                        }
+                        .buttonStyle(PlayGameButton())
+                        Spacer()
+                    }
+                }
             }
         }
         .padding()
@@ -113,28 +137,32 @@ struct ContentView: View {
         var workingNumber = 0
         questionBank = [0]
         answerBank = [0]
-        score = 0
-        showGame = true
+//        score = 0
         for _ in 0..<howManyQuestions {
             workingNumber = multiplierBank[Int.random(in: 0...11)]
             questionBank.append(workingNumber)
             answerBank.append(selectedNumber * workingNumber)
 //            print(workingNumber)
         }
-        print("******** NEW GAME ********")
-        print("Question bank: \(questionBank)")
-        print("Answer Bank: \(answerBank)")
+//        print("******** NEW GAME ********")
+//        print("Question bank: \(questionBank)")
+//        print("Answer Bank: \(answerBank)")
+        
+        setUpView = false
+        gameView = true
     }
     
     func check() {
-        if gameStarted == true {
+        if gameView == true {
             print("the game has started")
             print(answerBank[questionNumber])
             if typedAnswer == answerBank[questionNumber]{
                 score += 1
                 if questionNumber == howManyQuestions {
                     questionNumber = 1
-                    showGame = false
+                    setUpView = false
+                    gameView = false
+                    gameOverView = true
                     print("*** GAME OVER ***")
                     //should show alert with score and ask to start new game
                 } else {
@@ -144,7 +172,9 @@ struct ContentView: View {
             } else {
                 if questionNumber == howManyQuestions {
                     questionNumber = 1
-                    showGame = false
+                    setUpView = false
+                    gameView = false
+                    gameOverView = true
                     print("*** GAME OVER ***")
                     //should show alert with score and ask to start new game
                 } else {
@@ -154,6 +184,12 @@ struct ContentView: View {
         } else {
            // show alert to start game
         }
+    }
+    
+    func playagain() {
+        gameOverView = false
+        setUpView = true
+        score = 0
     }
 }
 
