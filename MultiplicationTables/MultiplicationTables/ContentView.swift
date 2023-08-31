@@ -7,6 +7,17 @@
 
 import SwiftUI
 
+struct PlayGameButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding()
+            .background(Color(red: 125/255, green: 152/255, blue: 131/255))
+            .foregroundStyle(.white)
+            .font(.system(size: 30, weight: Font.Weight.semibold))
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+    }
+}
+
 struct ContentView: View {
     @State private var selectedNumber = 2
     @State private var howManyQuestions = 5
@@ -46,11 +57,19 @@ struct ContentView: View {
                 }
                 .pickerStyle(.segmented)
                 //show questions
-                Button("PlayGame"){
-                    //do something
-                    playGame()
-                    gameStarted.toggle()
-                }
+//                Button("PlayGame"){
+//                    //do something
+//                    playGame()
+//                    gameStarted.toggle()
+//                }
+                    Button {
+                        playGame()
+                        gameStarted.toggle()
+                    } label: {
+                        Text("Play Game")
+                            .frame(maxWidth: .infinity)
+                    }
+                .buttonStyle(PlayGameButton())
             }
                 //This group should only show after you hit "Play Game" button
                 VStack {
@@ -65,6 +84,7 @@ struct ContentView: View {
                         Button("Check"){
                             check()
                         }
+                        .buttonStyle(PlayGameButton())
                         Text("Score: \(score)")
                     }
                 }
