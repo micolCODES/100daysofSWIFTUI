@@ -39,53 +39,68 @@ struct ContentView: View {
             VStack {
                 if showGame == false {
                 //select which multiplication tables you want
+                Spacer()
                 Text("Pick a multiplication table")
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .font(.title)
+                    .fontWeight(.thin)
                 Picker("Multiplication table", selection: $selectedNumber){
                     ForEach(multiplicationTable, id: \.self){
                         Text("\($0)")
                     }
                 }
                 .pickerStyle(.segmented)
+                Spacer()
                 //select how many question you want
                 Text("Pick how many questions you want")
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .font(.title)
+                    .fontWeight(.thin)
                 Picker("Pick how many questions you want", selection: $howManyQuestions){
                     ForEach(questionOptions, id: \.self){
                         Text("\($0)")
                     }
                 }
                 .pickerStyle(.segmented)
-                //show questions
-//                Button("PlayGame"){
-//                    //do something
-//                    playGame()
-//                    gameStarted.toggle()
-//                }
-                    Button {
-                        playGame()
-                        gameStarted.toggle()
-                    } label: {
-                        Text("Play Game")
-                            .frame(maxWidth: .infinity)
-                    }
+                
+                Spacer()
+                Button {
+                    playGame()
+                    gameStarted.toggle()
+                } label: {
+                    Text("Play Game")
+                        .frame(maxWidth: .infinity)
+                }
                 .buttonStyle(PlayGameButton())
             }
+                
+            Spacer()
                 //This group should only show after you hit "Play Game" button
                 VStack {
                     if showGame {
                         
                         Text("Question # \(questionNumber)")
-                        
-                        Text("What is \(selectedNumber) x \(gameStarted ? questionBank[questionNumber] : questionBank[0])")
-                        
-                        TextField("Enter your name", value: $typedAnswer, format: .number)
+                            .font(.title)
+                            .fontWeight(.thin)
+                        Spacer()
+                        Text("\(selectedNumber) x \(gameStarted ? questionBank[questionNumber] : questionBank[0])")
+                            .font(Font.system(size: 50))
+                            .foregroundColor((Color(red: 98/255, green: 123/255, blue: 87/255)))
+                        Spacer()
+                        TextField("...", value: $typedAnswer, format: .number)
                             .keyboardType(.decimalPad)
+                            .font(Font.system(size: 100))
+                            .multilineTextAlignment(.center)
+                        Spacer()
                         Button("Check"){
                             check()
                         }
                         .buttonStyle(PlayGameButton())
+                        
+                        Spacer()
                         Text("Score: \(score)")
+                            .font(.title)
+                            .fontWeight(.thin)
                     }
                 }
                 //alert to end game and play a new one
