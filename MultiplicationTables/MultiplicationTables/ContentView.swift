@@ -23,6 +23,7 @@ struct ContentView: View {
     @State private var howManyQuestions = 5
     @State private var questionBank = [0]
     @State private var answerBank = [0]
+    @State private var userAnswerBank = [0]
     @State private var typedAnswer = 0
     @State private var score = 0
     @State private var questionNumber = 1
@@ -102,7 +103,7 @@ struct ContentView: View {
                             .fontWeight(.thin)
                     }
                 }
-                //alert to end game and play a new one
+                //Game Over View Score
                 VStack {
                     if gameOverView {
                         Spacer()
@@ -120,6 +121,34 @@ struct ContentView: View {
                         Text("out of \(howManyQuestions)")
                             .font(.title)
                             .fontWeight(.thin)
+                    }
+                }
+                //Game Over View Answers
+                VStack {
+                    if gameOverView {
+                        Spacer()
+                        Text("Your answers:")
+                            .font(.title2)
+                            .fontWeight(.thin)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading, 40)
+                        ForEach((1...howManyQuestions), id:\.self) {
+                            Text("\($0)) \(selectedNumber)・\(questionBank[$0]) = \(userAnswerBank[$0])  \(userAnswerBank[$0] == answerBank[$0] ? "✔️" : "❌ \(selectedNumber)・\(questionBank[$0]) = \(answerBank[$0])")")
+                                .font(.headline)
+                                .fontWeight(userAnswerBank[$0] == answerBank[$0] ? .thin : .bold)
+                                .foregroundColor(userAnswerBank[$0] == answerBank[$0] ? .black : .red)
+                                .padding(3)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.leading, 40)
+                    }
+                }
+                .padding()
+                .background(Color(red: 229/255, green: 234/255, blue: 230/255))
+                .cornerRadius(15)
+                //Game Over View Button
+                VStack {
+                    if gameOverView {
                         Spacer()
                         Button("Play Again"){
                             playagain()
@@ -137,7 +166,7 @@ struct ContentView: View {
         var workingNumber = 0
         questionBank = [0]
         answerBank = [0]
-//        score = 0
+        userAnswerBank = [0]
         for _ in 0..<howManyQuestions {
             workingNumber = multiplierBank[Int.random(in: 0...11)]
             questionBank.append(workingNumber)
@@ -156,6 +185,7 @@ struct ContentView: View {
         if gameView == true {
             print("the game has started")
             print(answerBank[questionNumber])
+            userAnswerBank.append(typedAnswer)
             if typedAnswer == answerBank[questionNumber]{
                 score += 1
                 if questionNumber == howManyQuestions {
@@ -163,7 +193,6 @@ struct ContentView: View {
                     setUpView = false
                     gameView = false
                     gameOverView = true
-                    print("*** GAME OVER ***")
                     //should show alert with score and ask to start new game
                 } else {
                     questionNumber += 1
@@ -175,7 +204,6 @@ struct ContentView: View {
                     setUpView = false
                     gameView = false
                     gameOverView = true
-                    print("*** GAME OVER ***")
                     //should show alert with score and ask to start new game
                 } else {
                     questionNumber += 1
