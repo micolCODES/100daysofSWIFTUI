@@ -14,8 +14,8 @@ struct ContentView: View {
     @State private var answerBank = [0]
     @State private var typedAnswer = 0
     @State private var score = 0
-    @State private var workingNumber = 0
     @State private var questionNumber = 1
+    @State private var gameStarted = false
     
     var multiplierBank = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     var multiplicationTable = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
@@ -47,6 +47,7 @@ struct ContentView: View {
                 Button("PlayGame"){
                     //do something
                     makeQuestions()
+                    gameStarted.toggle()
                 }
                 //This group should only show after you hit "Play Game" button
                 VStack {
@@ -54,7 +55,7 @@ struct ContentView: View {
                         Text("Question # \(questionNumber)")
                     }
                     VStack {
-                        Text("What is \(selectedNumber) x \(questionBank[0])")
+                        Text("What is \(selectedNumber) x \(gameStarted ? questionBank[questionNumber] : questionBank[0])")
                     }
                     VStack {
                         TextField("Enter your name", value: $typedAnswer, format: .number)
@@ -75,28 +76,47 @@ struct ContentView: View {
     }
     
     func makeQuestions(){
-        workingNumber = 0
+        var workingNumber = 0
         questionBank = [0]
         answerBank = [0]
         for _ in 0..<howManyQuestions {
             workingNumber = multiplierBank[Int.random(in: 0...11)]
             questionBank.append(workingNumber)
             answerBank.append(selectedNumber * workingNumber)
-            print(workingNumber)
+//            print(workingNumber)
         }
-        print(questionBank)
-        print(answerBank)
+        print("******** NEW GAME ********")
+        print("Question bank: \(questionBank)")
+        print("Answer Bank: \(answerBank)")
     }
     
     func check() {
-        if typedAnswer == questionBank[questionNumber]{
-            score += 1
-            if questionNumber == howManyQuestions {
-                questionNumber = 1
+        if gameStarted == true {
+            print("the game has started")
+            print(answerBank[questionNumber])
+            if typedAnswer == answerBank[questionNumber]{
+                score += 1
+                if questionNumber == howManyQuestions {
+                    questionNumber = 1
+                    score = 0
+                    print("*** GAME OVER ***")
+                    //should show alert with score and ask to start new game
+                } else {
+                    questionNumber += 1
+                }
+                //add text message or answer preview of some kind
             } else {
-                questionNumber += 1
+                if questionNumber == howManyQuestions {
+                    questionNumber = 1
+                    score = 0
+                    print("*** GAME OVER ***")
+                    //should show alert with score and ask to start new game
+                } else {
+                    questionNumber += 1
+                }
             }
-            //add text message or answer preview of some kind
+        } else {
+           // show alert to start game
         }
     }
 }
