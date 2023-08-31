@@ -39,43 +39,45 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
+                //setup View
+                VStack {
                 if setUpView {
-                //select which multiplication tables you want
-                Spacer()
-                Text("Pick a multiplication table")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(.title)
-                    .fontWeight(.thin)
-                Picker("Multiplication table", selection: $selectedNumber){
-                    ForEach(multiplicationTable, id: \.self){
-                        Text("\($0)")
+                    //select which multiplication tables you want
+                    Spacer()
+                    Text("Pick a multiplication table")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.title)
+                        .fontWeight(.thin)
+                    Picker("Multiplication table", selection: $selectedNumber){
+                        ForEach(multiplicationTable, id: \.self){
+                            Text("\($0)")
+                        }
                     }
-                }
-                .pickerStyle(.segmented)
-                Spacer()
-                //select how many question you want
-                Text("Pick how many questions you want")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(.title)
-                    .fontWeight(.thin)
-                Picker("Pick how many questions you want", selection: $howManyQuestions){
-                    ForEach(questionOptions, id: \.self){
-                        Text("\($0)")
+                    .pickerStyle(.segmented)
+                    Spacer()
+                    //select how many question you want
+                    Text("Pick how many questions you want")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.title)
+                        .fontWeight(.thin)
+                    Picker("Pick how many questions you want", selection: $howManyQuestions){
+                        ForEach(questionOptions, id: \.self){
+                            Text("\($0)")
+                        }
                     }
+                    .pickerStyle(.segmented)
+                    Spacer()
+                    Button {
+                        playGame()
+                    } label: {
+                        Text("Play Game")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(PlayGameButton())
+                    Spacer()
                 }
-                .pickerStyle(.segmented)
-                
-                Spacer()
-                Button {
-                    playGame()
-                } label: {
-                    Text("Play Game")
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(PlayGameButton())
-                Spacer()
             }
-                //This group should only show after you hit "Play Game" button
+                //Game View
                 VStack {
                     if gameView {
                         
