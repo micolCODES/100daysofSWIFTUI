@@ -126,28 +126,31 @@ struct ContentView: View {
                     }
                 }
                 //Game Over View Answers
-                VStack {
-                    if gameOverView {
-                        Spacer()
-                        Text("Your answers:")
-                            .font(.title2)
-                            .fontWeight(.thin)
+                ScrollView{
+                    VStack {
+                        if gameOverView {
+                            Spacer()
+                            Text("Your answers:")
+                                .font(.title2)
+                                .fontWeight(.thin)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.leading, 40)
+                            ForEach((1...howManyQuestions), id:\.self) {
+                                Text("\($0)) \(selectedNumber)・\(questionBank[$0]) = \(userAnswerBank[$0])  \(userAnswerBank[$0] == answerBank[$0] ? "✔️" : "❌ \(selectedNumber)・\(questionBank[$0]) = \(answerBank[$0])")")
+                                    .font(.headline)
+                                    .fontWeight(userAnswerBank[$0] == answerBank[$0] ? .thin : .bold)
+                                    .foregroundColor(userAnswerBank[$0] == answerBank[$0] ? .black : .red)
+                                    .padding(3)
+                            }
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.leading, 40)
-                        ForEach((1...howManyQuestions), id:\.self) {
-                            Text("\($0)) \(selectedNumber)・\(questionBank[$0]) = \(userAnswerBank[$0])  \(userAnswerBank[$0] == answerBank[$0] ? "✔️" : "❌ \(selectedNumber)・\(questionBank[$0]) = \(answerBank[$0])")")
-                                .font(.headline)
-                                .fontWeight(userAnswerBank[$0] == answerBank[$0] ? .thin : .bold)
-                                .foregroundColor(userAnswerBank[$0] == answerBank[$0] ? .black : .red)
-                                .padding(3)
                         }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.leading, 40)
                     }
+                    .padding()
+                    .background(Color(red: 242/255, green: 244/255, blue: 242/255))
+                    .cornerRadius(10)
                 }
-                .padding()
-                .background(Color(red: 229/255, green: 234/255, blue: 230/255))
-                .cornerRadius(15)
+                .frame(height: gameOverView ? 300 : 0)
                 //Game Over View Button
                 VStack {
                     if gameOverView {
