@@ -133,11 +133,16 @@ struct ContentView: View {
                     VStack {
                         if gameOverView {
                             Spacer()
-                            Text("Your missed answers:")
-                                .font(.title2)
-                                .fontWeight(.thin)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.leading, 5)
+                            if reviewAnswerBank.count == 1 {
+                                Text("🥳")
+                                    .font(Font.system(size: 170))
+                            } else {
+                                Text("Your missed answers:")
+                                    .font(.title2)
+                                    .fontWeight(.thin)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .padding(.leading, 5)
+                            }
                             ForEach((1...howManyQuestions), id:\.self) {
                                 if userAnswerBank[$0] != answerBank[$0] {
                                     Text("\($0)) \(selectedNumber)・\(questionBank[$0]) = \(userAnswerBank[$0]) ❌ \(selectedNumber)・\(questionBank[$0]) = \(answerBank[$0])")
@@ -145,11 +150,6 @@ struct ContentView: View {
                                         .fontWeight(.medium)
                                         .foregroundColor(.red)
                                         .padding(3)
-//                                    Text("\($0)) \(selectedNumber)・\(questionBank[$0]) = \(userAnswerBank[$0])  \(userAnswerBank[$0] == answerBank[$0] ? "✔️" : "❌ \(selectedNumber)・\(questionBank[$0]) = \(answerBank[$0])")")
-//                                        .font(.headline)
-//                                        .fontWeight(userAnswerBank[$0] == answerBank[$0] ? .thin : .bold)
-//                                        .foregroundColor(userAnswerBank[$0] == answerBank[$0] ? .black : .red)
-//                                        .padding(3)
                                 }
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -207,8 +207,6 @@ struct ContentView: View {
                     setUpView = false
                     gameView = false
                     gameOverView = true
-                    print(reviewAnswerBank)
-                    print(reviewQuestionBank)
                     //should show alert with score and ask to start new game
                 } else {
                     questionNumber += 1
@@ -228,9 +226,8 @@ struct ContentView: View {
                     questionNumber += 1
                 }
             }
-        } else {
-           // show alert to start game
         }
+        print("User answer bank count: \(userAnswerBank.count)")
     }
     
     func playagain() {
@@ -251,7 +248,6 @@ struct ContentView: View {
         if reviewQuestionBank.count > 1 {
             reviewQuestionBank = [0]
             howManyQuestions = questionBank.count - 1
-            print("New howManyQuestions: \(howManyQuestions)")
             setUpView = false
             gameView = true
             gameOverView = false
