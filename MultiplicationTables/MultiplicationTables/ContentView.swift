@@ -133,15 +133,28 @@ struct ContentView: View {
                     VStack {
                         if gameOverView {
                             Spacer()
-                            if reviewAnswerBank.count == 1 {
-                                Text("🥳")
-                                    .font(Font.system(size: 170))
+                            if isReview {
+                                if reviewAnswerBank.count == 1 {
+                                    Text("👍")
+                                        .font(Font.system(size: 170))
+                                } else {
+                                    Text("Your missed answers:")
+                                        .font(.title2)
+                                        .fontWeight(.thin)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .padding(.leading, 5)
+                                }
                             } else {
-                                Text("Your missed answers:")
-                                    .font(.title2)
-                                    .fontWeight(.thin)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(.leading, 5)
+                                if reviewAnswerBank.count == 1 {
+                                    Text("🥳")
+                                        .font(Font.system(size: 170))
+                                } else {
+                                    Text("Your missed answers:")
+                                        .font(.title2)
+                                        .fontWeight(.thin)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .padding(.leading, 5)
+                                }
                             }
                             ForEach((1...howManyQuestions), id:\.self) {
                                 if userAnswerBank[$0] != answerBank[$0] {
@@ -157,17 +170,19 @@ struct ContentView: View {
                         }
                     }
                     .padding()
-                    .background(Color(red: 242/255, green: 244/255, blue: 242/255))
+                    .background(reviewAnswerBank.count == 1 ? .white : Color(red: 242/255, green: 244/255, blue: 242/255))
                     .cornerRadius(10)
                 }
                 .frame(height: gameOverView ? 300 : 0)
                 //Game Over View Button
                 VStack {
                     if gameOverView {
-                        Button("Review"){
-                            review()
+                        if reviewAnswerBank.count != 1 {
+                            Button("Review"){
+                                review()
+                            }
+                            .buttonStyle(PlayGameButton())
                         }
-                        .buttonStyle(PlayGameButton())
                         Button("Play Again"){
                             playagain()
                         }
@@ -227,12 +242,13 @@ struct ContentView: View {
                 }
             }
         }
-        print("User answer bank count: \(userAnswerBank.count)")
+        print("Review answer bank count: \(reviewAnswerBank.count)")
     }
     
     func playagain() {
         gameOverView = false
         setUpView = true
+        isReview = false
         score = 0
     }
     
@@ -253,7 +269,6 @@ struct ContentView: View {
             gameOverView = false
         } else {
             reviewQuestionBank = [0]
-            isReview = false
             setUpView = true
             gameView = false
             gameOverView = false
