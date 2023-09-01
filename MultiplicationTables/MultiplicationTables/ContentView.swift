@@ -25,11 +25,14 @@ struct ContentView: View {
     @State private var answerBank = [0]
     @State private var userAnswerBank = [0]
     @State private var typedAnswer = 0
+    @State private var reviewQuestionBank = [0]
+    @State private var reviewAnswerBank = [0]
     @State private var score = 0
     @State private var questionNumber = 1
     @State private var setUpView = true
     @State private var gameView = false
     @State private var gameOverView = false
+    @State private var isReview = false
     
     var multiplierBank = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     var multiplicationTable = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
@@ -119,7 +122,7 @@ struct ContentView: View {
                         Text("\(score)")
                             .font(Font.system(size: 100))
                             .foregroundColor((Color(red: 98/255, green: 123/255, blue: 87/255)))
-                            .padding()
+//                            .padding()
                         Text("out of \(howManyQuestions)")
                             .font(.title)
                             .fontWeight(.thin)
@@ -161,12 +164,14 @@ struct ContentView: View {
                 //Game Over View Button
                 VStack {
                     if gameOverView {
-                        Spacer()
+                        Button("Review"){
+                            review()
+                        }
+                        .buttonStyle(PlayGameButton())
                         Button("Play Again"){
                             playagain()
                         }
                         .buttonStyle(PlayGameButton())
-                        Spacer()
                     }
                 }
             }
@@ -179,15 +184,13 @@ struct ContentView: View {
         questionBank = [0]
         answerBank = [0]
         userAnswerBank = [0]
+        reviewAnswerBank = [0]
+        reviewQuestionBank = [0]
         for _ in 0..<howManyQuestions {
             workingNumber = multiplierBank[Int.random(in: 0...11)]
             questionBank.append(workingNumber)
             answerBank.append(selectedNumber * workingNumber)
-//            print(workingNumber)
         }
-//        print("******** NEW GAME ********")
-//        print("Question bank: \(questionBank)")
-//        print("Answer Bank: \(answerBank)")
         
         setUpView = false
         gameView = true
@@ -195,9 +198,8 @@ struct ContentView: View {
     
     func check() {
         if gameView == true {
-            print("the game has started")
-            print(answerBank[questionNumber])
             userAnswerBank.append(typedAnswer)
+            //if right answer
             if typedAnswer == answerBank[questionNumber]{
                 score += 1
                 if questionNumber == howManyQuestions {
@@ -205,18 +207,23 @@ struct ContentView: View {
                     setUpView = false
                     gameView = false
                     gameOverView = true
+                    print(reviewAnswerBank)
+                    print(reviewQuestionBank)
                     //should show alert with score and ask to start new game
                 } else {
                     questionNumber += 1
                 }
-                //add text message or answer preview of some kind
+            //if wrong answer
             } else {
+                reviewAnswerBank.append(answerBank[questionNumber])
+                reviewQuestionBank.append(answerBank[questionNumber] / selectedNumber)
                 if questionNumber == howManyQuestions {
                     questionNumber = 1
                     setUpView = false
                     gameView = false
                     gameOverView = true
-                    //should show alert with score and ask to start new game
+                    print("Review Answer Bank: \(reviewAnswerBank)")
+                    print("Review Question Bank: \(reviewQuestionBank)")
                 } else {
                     questionNumber += 1
                 }
@@ -230,6 +237,31 @@ struct ContentView: View {
         gameOverView = false
         setUpView = true
         score = 0
+    }
+    
+    func review() {
+        isReview = true
+        score = 0
+        answerBank = reviewAnswerBank
+        questionBank = reviewQuestionBank
+        print("New Answer Bank: \(answerBank)")
+        print("New Question Bank: \(questionBank)")
+        userAnswerBank = [0]
+        reviewAnswerBank = [0]
+        if reviewQuestionBank.count > 1 {
+            reviewQuestionBank = [0]
+            howManyQuestions = questionBank.count - 1
+            print("New howManyQuestions: \(howManyQuestions)")
+            setUpView = false
+            gameView = true
+            gameOverView = false
+        } else {
+            reviewQuestionBank = [0]
+            isReview = false
+            setUpView = true
+            gameView = false
+            gameOverView = false
+        }
     }
 }
 
