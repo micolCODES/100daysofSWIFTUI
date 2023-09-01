@@ -130,20 +130,27 @@ struct ContentView: View {
                     VStack {
                         if gameOverView {
                             Spacer()
-                            Text("Your answers:")
+                            Text("Your missed answers:")
                                 .font(.title2)
                                 .fontWeight(.thin)
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.leading, 40)
+                                .padding(.leading, 5)
                             ForEach((1...howManyQuestions), id:\.self) {
-                                Text("\($0)) \(selectedNumber)・\(questionBank[$0]) = \(userAnswerBank[$0])  \(userAnswerBank[$0] == answerBank[$0] ? "✔️" : "❌ \(selectedNumber)・\(questionBank[$0]) = \(answerBank[$0])")")
-                                    .font(.headline)
-                                    .fontWeight(userAnswerBank[$0] == answerBank[$0] ? .thin : .bold)
-                                    .foregroundColor(userAnswerBank[$0] == answerBank[$0] ? .black : .red)
-                                    .padding(3)
+                                if userAnswerBank[$0] != answerBank[$0] {
+                                    Text("\($0)) \(selectedNumber)・\(questionBank[$0]) = \(userAnswerBank[$0]) ❌ \(selectedNumber)・\(questionBank[$0]) = \(answerBank[$0])")
+                                        .font(.headline)
+                                        .fontWeight(.medium)
+                                        .foregroundColor(.red)
+                                        .padding(3)
+//                                    Text("\($0)) \(selectedNumber)・\(questionBank[$0]) = \(userAnswerBank[$0])  \(userAnswerBank[$0] == answerBank[$0] ? "✔️" : "❌ \(selectedNumber)・\(questionBank[$0]) = \(answerBank[$0])")")
+//                                        .font(.headline)
+//                                        .fontWeight(userAnswerBank[$0] == answerBank[$0] ? .thin : .bold)
+//                                        .foregroundColor(userAnswerBank[$0] == answerBank[$0] ? .black : .red)
+//                                        .padding(3)
+                                }
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.leading, 40)
+                            .padding(.leading, 5)
                         }
                     }
                     .padding()
