@@ -36,7 +36,7 @@ struct ContentView: View {
     
     var multiplierBank = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     var multiplicationTable = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-    var questionOptions = [1, 5, 10, 15, 20]
+    var questionOptions = [5, 10, 15, 20]
     
     
     var body: some View {
@@ -83,7 +83,6 @@ struct ContentView: View {
                 //Game View
                 VStack {
                     if gameView {
-                        
                         Text("Question # \(questionNumber)")
                             .font(.title)
                             .fontWeight(.thin)
