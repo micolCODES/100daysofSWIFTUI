@@ -16,7 +16,18 @@ struct ContentView: View {
             List {
                 // using ID from struct in ExpenseItems, which is a self-generated UUID, which is unique for each item
                 ForEach(expenses.items/*, id: \.id <- I can remove this since I have marked the struct as "Identifiable" */) { item in
-                    Text(item.name)
+                    HStack {
+                        VStack(alignment: .leading){
+                            Text(item.name)
+                                .font(.headline)
+                            Text(item.type)
+                        }
+                        Spacer()
+                        VStack(alignment: .trailing){
+                            Text(item.amount, format: .currency(code: "EUR"))
+                                .font(.headline)
+                        }
+                    }
                 }
                 .onDelete(perform: removeItems)
                 
