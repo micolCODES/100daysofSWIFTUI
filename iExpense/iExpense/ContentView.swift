@@ -33,6 +33,8 @@ struct ContentView: View {
     }
 // -------------- METHODS GO HERE ----------------
     func removeItems(at offsets: IndexSet) {
+        // IndexSet tells us a list of items in the list, each with its own number
+        // remove(atOffsets: )
         expenses.items.remove(atOffsets: offsets)
     }
 }
