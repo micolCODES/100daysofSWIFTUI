@@ -24,9 +24,11 @@ struct ContentView: View {
             .navigationTitle("iExpense")
             .toolbar {
                 Button {
+                    
                     /*remove previous code and add a "show view" to show the view I created
                      let expense = ExpenseItem(name: "Test", type: "Personal", amount: 5)
-                                        expenses.items.append(expense)*/
+                     expenses.items.append(expense)*/
+                    
                     showAddExpense = true
                 } label: {
                     Image(systemName: "plus")
