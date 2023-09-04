@@ -14,7 +14,8 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(expenses.items, id: \.name) { item in
+                // using ID from struct in ExpenseItems, which is a self-generated UUID, which is unique for each item
+                ForEach(expenses.items/*, id: \.id <- I can remove this since I have marked the struct as "Identifiable" */) { item in
                     Text(item.name)
                 }
                 .onDelete(perform: removeItems)
