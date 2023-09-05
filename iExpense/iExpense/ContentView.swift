@@ -24,7 +24,7 @@ struct ContentView: View {
                         }
                         Spacer()
                         VStack(alignment: .trailing){
-                            Text(item.amount, format: .currency(code: "EUR"))
+                            Text(item.amount, format:.currency(code: Locale.current.currency?.identifier ?? "€"))
                                 .font(.headline)
                         }
                     }
