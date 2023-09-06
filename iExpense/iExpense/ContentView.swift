@@ -25,7 +25,8 @@ struct ContentView: View {
                         Spacer()
                         VStack(alignment: .trailing){
                             Text(item.amount, format:.currency(code: Locale.current.currency?.identifier ?? "€"))
-                                .font(.headline)
+                                .foregroundColor( item.amount > 5 ? .black : .gray)
+                                .fontWeight(item.amount < 100 ? .medium : .bold)
                         }
                     }
                 }
@@ -58,6 +59,7 @@ struct ContentView: View {
         // remove(atOffsets: )
         expenses.items.remove(atOffsets: offsets)
     }
+// -------------- METHODS END HERE ----------------
 }
 
 struct ContentView_Previews: PreviewProvider {
