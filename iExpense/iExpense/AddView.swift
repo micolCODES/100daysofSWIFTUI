@@ -20,15 +20,6 @@ struct AddView: View {
     var body: some View {
         NavigationView() {
             Form {
-                TextField("Name", text: $name)
-                Picker("Type", selection: $type) {
-                    ForEach(types, id: \.self) {
-                        Text($0)
-                    }
-                }
-                TextField("Amount", value: $amount, format:.currency(code: Locale.current.currency?.identifier ?? "€"))
-                    .keyboardType(.decimalPad)
-            }
             .navigationTitle("Add new expense")
             .toolbar {
                 Button("Save")

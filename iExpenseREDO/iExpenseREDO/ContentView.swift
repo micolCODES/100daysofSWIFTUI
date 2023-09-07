@@ -8,19 +8,28 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var expenses = Expenses()
+    @State private var showAddExpense = false
+    
     var body: some View {
         NavigationView {
             List{
-                //ForEach
+                ForEach(expenses.items) { item in
+                    Text(item.name)
+                }
             }
             .navigationTitle("iExpenseREDO")
-        }
-        .toolbar {
-            Button {
-                //add item button
-            } label: {
-                Text("Add Item")
+            .toolbar {
+                Button {
+                    showAddExpense = true
+                } label: {
+                    Text("Add Item")
+                }
             }
+        }
+        
+        .sheet(isPresented: $showAddExpense) {
+            AddView(expense: expenses)
         }
     }
 }
