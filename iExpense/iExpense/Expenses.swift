@@ -22,7 +22,7 @@ class Expenses : ObservableObject {
         //If you can read Items in UserDefaults then...
         if let savedItems = UserDefaults.standard.data(forKey: "Items") {
             //... then please decoded them here, and IF you can decode them, then ...
-            if let decodedItems = try? JSONDecoder().decode([ExpenseItem].self/*this is what I EXPECT to receive. I use .self to explain that I am referring to the array of ExpenseItems by itelf, not a specific array, but that idea of an array*/, from: savedItems) {
+            if let decodedItems = try? JSONDecoder().decode([ExpenseItem].self/*this is what I EXPECT to receive. I use .self to explain that I am referring to the array of ExpenseItems by itelf: not a specific array, but that idea of an array*/, from: savedItems) {
                 // ... then store them into items
                 items = decodedItems
                 return
