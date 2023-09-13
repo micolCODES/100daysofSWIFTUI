@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
+    let astronauts = Bundle.main.decode("astronauts.json")
+    
     var body: some View {
         VStack {
-            Text("Hello, world!")
+            //checking that it's load correctly by getting a count of the astronauts loaded
+            Text("\(astronauts.count)")
         }
         .padding()
     }
