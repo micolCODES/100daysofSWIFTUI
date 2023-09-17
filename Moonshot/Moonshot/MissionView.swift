@@ -25,13 +25,28 @@ struct MissionView: View {
                         .scaledToFit()
                         .frame(maxWidth: geometry.size.width * 0.6)
                     
+                    
+                    
                     VStack(alignment: .leading) {
+                        Rectangle()
+                            .frame(height:2)
+                            .foregroundColor(.lightBackground)
+                            .padding(.vertical)
+                        
                         Text("Mission Highlights")
                             .font(.title.bold())
                             .padding(.bottom, 5)
                         
                         Text(mission.description)
                         
+                        Rectangle()
+                            .frame(height:2)
+                            .foregroundColor(.lightBackground)
+                            .padding(.vertical)
+                        
+                        Text("Crew")
+                            .font(.title.bold())
+                            .padding(.bottom, 5)
                     }
                     .padding(.horizontal)
                     
@@ -46,9 +61,9 @@ struct MissionView: View {
                                         Image(crewMember.astronaut.id)
                                             .resizable()
                                             .frame(width: 104, height: 72)
-                                            .clipShape(Capsule())
+                                            .clipShape(Circle())
                                             .overlay(
-                                                Capsule()
+                                                Circle()
                                                     .strokeBorder(.white, lineWidth: 1)
                                             )
                                         
