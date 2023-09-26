@@ -46,6 +46,7 @@ struct ContentView: View {
     @State private var petalWidth = 100.0
 
     var body: some View {
+        
         VStack {
             Flower(petalOffset: petalOffset, petalWidth: petalWidth)
                 .fill(.red, style: FillStyle(eoFill: true))
