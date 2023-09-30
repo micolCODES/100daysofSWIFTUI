@@ -41,7 +41,7 @@ struct ContentView: View {
                 }
             }
             .sheet(isPresented:$showAddSheet){
-                HabitInfoView(habits: listOfHabits)
+                AddHabitView(habits: listOfHabits)
             }
         }
     }
