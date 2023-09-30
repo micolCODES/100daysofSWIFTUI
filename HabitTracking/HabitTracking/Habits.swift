@@ -8,7 +8,7 @@
 import Foundation
 
 class Habits: ObservableObject {
-    @Published var habits : [Habit]() {
+    @Published var habits = [Habit](){
         didSet {
             let encoder = JSONEncoder()
             
