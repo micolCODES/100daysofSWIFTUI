@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B22B9F912AC880EA005183D5 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22B9F902AC880EA005183D5 /* Habit.swift */; };
 		B22B9F932AC8815C005183D5 /* Habits.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22B9F922AC8815C005183D5 /* Habits.swift */; };
+		B22B9F952AC884AC005183D5 /* HabitInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22B9F942AC884AC005183D5 /* HabitInfoView.swift */; };
 		B2B7B51D2AA20383007F94AF /* HabitTrackingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B7B51C2AA20383007F94AF /* HabitTrackingApp.swift */; };
 		B2B7B51F2AA20383007F94AF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B7B51E2AA20383007F94AF /* ContentView.swift */; };
 		B2B7B5212AA20384007F94AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2B7B5202AA20384007F94AF /* Assets.xcassets */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		B22B9F902AC880EA005183D5 /* Habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
 		B22B9F922AC8815C005183D5 /* Habits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habits.swift; sourceTree = "<group>"; };
+		B22B9F942AC884AC005183D5 /* HabitInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitInfoView.swift; sourceTree = "<group>"; };
 		B2B7B5192AA20383007F94AF /* HabitTracking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitTracking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2B7B51C2AA20383007F94AF /* HabitTrackingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTrackingApp.swift; sourceTree = "<group>"; };
 		B2B7B51E2AA20383007F94AF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			children = (
 				B2B7B51C2AA20383007F94AF /* HabitTrackingApp.swift */,
 				B2B7B51E2AA20383007F94AF /* ContentView.swift */,
+				B22B9F942AC884AC005183D5 /* HabitInfoView.swift */,
 				B22B9F902AC880EA005183D5 /* Habit.swift */,
 				B22B9F922AC8815C005183D5 /* Habits.swift */,
 				B2B7B5202AA20384007F94AF /* Assets.xcassets */,
@@ -263,6 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B22B9F952AC884AC005183D5 /* HabitInfoView.swift in Sources */,
 				B22B9F912AC880EA005183D5 /* Habit.swift in Sources */,
 				B2B7B51F2AA20383007F94AF /* ContentView.swift in Sources */,
 				B22B9F932AC8815C005183D5 /* Habits.swift in Sources */,
