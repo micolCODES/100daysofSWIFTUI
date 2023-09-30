@@ -8,14 +8,34 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var listOfHabits = Habits()
+    @State private var showAddSheet = false
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationStack{
+            List {
+                ForEach(listOfHabits.habits){
+                    habit in
+                    HStack {
+                        VStack(alignment: .leading){
+                            Text(habit.name)
+                        }
+                        VStack(alignment: .trailing){
+                            //count number of times it was done
+                            Text("5 times this week")
+                        }
+                    }
+                }
+            }
+            .navigationTitle("HabitTracker")
+            .toolbar {
+                Button {
+                    showAddSheet = true
+                } label: {
+                    Image(systemName: "plus")
+                }
+            }
         }
-        .padding()
     }
 }
 
