@@ -16,14 +16,18 @@ struct ContentView: View {
             List {
                 ForEach(listOfHabits.habits){
                     habit in
-                    HStack {
-                        VStack(alignment: .leading){
-                            Text(habit.name)
-                        }
-                        Spacer()
-                        VStack(alignment: .trailing){
-                            //count number of times it was done
-                            Text("###")
+                    NavigationLink {
+                        // link to something
+                    } label: {
+                        HStack {
+                            VStack(alignment: .leading){
+                                Text(habit.name)
+                            }
+                            Spacer()
+                            VStack(alignment: .trailing){
+                                //count number of times it was done
+                                Text("###")
+                            }
                         }
                     }
                 }
