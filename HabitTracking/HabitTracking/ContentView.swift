@@ -20,9 +20,10 @@ struct ContentView: View {
                         VStack(alignment: .leading){
                             Text(habit.name)
                         }
+                        Spacer()
                         VStack(alignment: .trailing){
                             //count number of times it was done
-                            Text("5 times this week")
+                            Text("###")
                         }
                     }
                 }
@@ -34,6 +35,9 @@ struct ContentView: View {
                 } label: {
                     Image(systemName: "plus")
                 }
+            }
+            .sheet(isPresented:$showAddSheet){
+                HabitInfoView(habits: listOfHabits)
             }
         }
     }
