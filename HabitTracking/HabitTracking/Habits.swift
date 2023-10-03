@@ -8,11 +8,11 @@
 import Foundation
 
 class Habits: ObservableObject {
-    @Published var habits = [Habit](){
+    @Published var items = [Habit](){
         didSet {
             let encoder = JSONEncoder()
             
-            if let encoded = try? encoder.encode(habits){
+            if let encoded = try? encoder.encode(items){
                 UserDefaults.standard.set(encoded, forKey: "Habits")
             }
         }
@@ -21,10 +21,12 @@ class Habits: ObservableObject {
     init() {
         if let savedHabits = UserDefaults.standard.data(forKey: "Habits") {
             if let decodedHabits = try? JSONDecoder().decode([Habit].self, from: savedHabits){
-                habits = decodedHabits
+                items = decodedHabits
                 return
             }
         }
-        habits = []
+        items = []
     }
+    
+    static let sampleHabit = Habit(name: "Testhabit", description: "This is a test description, and it's onlg so it will end up on two lines.", counter: 6)
 }

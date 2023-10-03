@@ -11,4 +11,5 @@ struct Habit: Codable, Identifiable {
     var id = UUID()
     var name: String
     var description: String
+    var counter: Int
 }

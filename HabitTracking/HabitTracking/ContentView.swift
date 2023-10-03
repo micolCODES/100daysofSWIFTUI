@@ -14,19 +14,18 @@ struct ContentView: View {
     var body: some View {
         NavigationStack{
             List {
-                ForEach(listOfHabits.habits){
-                    habit in
+                ForEach(listOfHabits.items){
+                    item in
                     NavigationLink {
-                        // link to something
+                        HabitDetailView(habit: item)
                     } label: {
                         HStack {
                             VStack(alignment: .leading){
-                                Text(habit.name)
+                                Text(item.name)
                             }
                             Spacer()
                             VStack(alignment: .trailing){
-                                //count number of times it was done
-                                Text("###")
+                                //Text(item.counter)
                             }
                         }
                     }
@@ -41,7 +40,7 @@ struct ContentView: View {
                 }
             }
             .sheet(isPresented:$showAddSheet){
-                AddHabitView(habits: listOfHabits)
+                AddHabitView(listOfHabits: listOfHabits)
             }
         }
     }
