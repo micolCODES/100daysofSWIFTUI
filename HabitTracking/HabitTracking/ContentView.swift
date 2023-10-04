@@ -17,7 +17,7 @@ struct ContentView: View {
                 ForEach(listOfHabits.items){
                     item in
                     NavigationLink {
-                        HabitDetailView(habit: item)
+                        HabitDetailView(listOfHabits: listOfHabits, habit: item)
                     } label: {
                         HStack {
                             VStack(alignment: .leading){
