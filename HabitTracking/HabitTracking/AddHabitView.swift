@@ -14,7 +14,6 @@ struct AddHabitView: View {
     
     @State private var name = ""
     @State private var description = ""
-    @State private var counter = 0
     
     
     var body: some View {
@@ -28,7 +27,7 @@ struct AddHabitView: View {
             }
             .toolbar {
                 Button {
-                    let newHabit = Habit(name: name, description: description, counter: counter)
+                    let newHabit = Habit(name: name, description: description, counter: 0)
                     listOfHabits.items.append(newHabit)
                     dismiss()
                 } label: {
