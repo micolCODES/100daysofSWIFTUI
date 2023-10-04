@@ -28,5 +28,5 @@ class Habits: ObservableObject {
         items = []
     }
     
-    static let sampleHabit = Habit(name: "Testhabit", description: "This is a test description, and it's onlg so it will end up on two lines.", counter: 6)
+    static let sampleHabit = Habit(name: "Testhabit", description: "This is a test description, and it's long so it will end up on two lines.", counter: 6)
 }
