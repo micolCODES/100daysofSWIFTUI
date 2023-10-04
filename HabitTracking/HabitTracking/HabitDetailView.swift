@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct HabitDetailView: View {
-    let habit: Habit
+    @ObservedObject var listOfHabits = Habits()
+    @State var habit: Habit
     
     var body: some View {
         ZStack{
@@ -16,22 +17,33 @@ struct HabitDetailView: View {
                 //EXTEND icon
                 Text(habit.name)
                 Text(habit.description)
-                //Text(habit.counter)
                 HStack {
                     Button {
-                        //increase count
+                        var tempHabit = habit
+                        tempHabit.counter += 1
+                        //in this view, liftofHabits is actually underfined, so it is being handled as an optional and needs the if let
+                        if let index = listOfHabits.items.firstIndex(of: habit) {
+                            listOfHabits.items[index] = tempHabit
+                        }
+                        habit = tempHabit
                     } label: {
                         Image(systemName: "plus")
                     }
-                    HStack {
-                        Button {
-                            // decrease count
-                        } label: {
-                            Image(systemName: "minus")
+                    Text("\(habit.counter)")
+                    Button {
+                        var tempHabit = habit
+                        tempHabit.counter -= 1
+                        //in this view, liftofHabits is actually underfined, so it is being handled as an optional and needs the if let
+                        if let index = listOfHabits.items.firstIndex(of: habit) {
+                            listOfHabits.items[index] = tempHabit
                         }
+                        habit = tempHabit
+                    } label: {
+                        Image(systemName: "minus")
                     }
                 }
             }
+            .padding()
         }
     }
 }
