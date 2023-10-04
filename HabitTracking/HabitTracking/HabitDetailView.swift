@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct HabitDetailView: View {
-    @ObservedObject var listOfHabits = Habits()
+    //here I am just passing my array of Habits in, since it's @ObservableObject I don't need to make a new one, just observe the one I created in the View with @StateObject
+    @ObservedObject var listOfHabits: Habits
     @State var habit: Habit
     
     var body: some View {
@@ -49,5 +50,5 @@ struct HabitDetailView: View {
 }
 
 #Preview {
-    HabitDetailView(habit: Habits.sampleHabit)
+    HabitDetailView(listOfHabits: Habits(), habit: Habits.sampleHabit)
 }
