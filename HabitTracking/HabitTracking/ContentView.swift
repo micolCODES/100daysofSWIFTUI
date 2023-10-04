@@ -25,11 +25,12 @@ struct ContentView: View {
                             }
                             Spacer()
                             VStack(alignment: .trailing){
-                                //Text(item.counter)
+                                Text("\(item.counter)")
                             }
                         }
                     }
                 }
+                .onDelete(perform: removeHabits)
             }
             .navigationTitle("HabitTracker")
             .toolbar {
@@ -43,6 +44,10 @@ struct ContentView: View {
                 AddHabitView(listOfHabits: listOfHabits)
             }
         }
+    }
+// ---------- METHODS GO HERE ----------
+    func removeHabits(at offsets: IndexSet){
+        listOfHabits.items.remove(atOffsets: offsets)
     }
 }
 
