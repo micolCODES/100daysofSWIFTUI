@@ -14,6 +14,7 @@
 		B2EB1B072AD1868B00B71BCA /* CupcakeCornerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EB1B062AD1868B00B71BCA /* CupcakeCornerTests.swift */; };
 		B2EB1B112AD1868B00B71BCA /* CupcakeCornerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EB1B102AD1868B00B71BCA /* CupcakeCornerUITests.swift */; };
 		B2EB1B132AD1868B00B71BCA /* CupcakeCornerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EB1B122AD1868B00B71BCA /* CupcakeCornerUITestsLaunchTests.swift */; };
+		B2EB1B202AD19CD300B71BCA /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EB1B1F2AD19CD300B71BCA /* Order.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		B2EB1B0C2AD1868B00B71BCA /* CupcakeCornerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CupcakeCornerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2EB1B102AD1868B00B71BCA /* CupcakeCornerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupcakeCornerUITests.swift; sourceTree = "<group>"; };
 		B2EB1B122AD1868B00B71BCA /* CupcakeCornerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupcakeCornerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B2EB1B1F2AD19CD300B71BCA /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			children = (
 				B2EB1AF52AD1868A00B71BCA /* CupcakeCornerApp.swift */,
 				B2EB1AF72AD1868A00B71BCA /* ContentView.swift */,
+				B2EB1B1F2AD19CD300B71BCA /* Order.swift */,
 				B2EB1AF92AD1868B00B71BCA /* Assets.xcassets */,
 				B2EB1AFB2AD1868B00B71BCA /* Preview Content */,
 			);
@@ -257,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2EB1B202AD19CD300B71BCA /* Order.swift in Sources */,
 				B2EB1AF82AD1868A00B71BCA /* ContentView.swift in Sources */,
 				B2EB1AF62AD1868A00B71BCA /* CupcakeCornerApp.swift in Sources */,
 			);
