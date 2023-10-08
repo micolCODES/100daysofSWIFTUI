@@ -23,7 +23,7 @@ struct CheckoutView: View {
                 }
                 .frame(height: 233)
                 
-                Text("Your total is \(order.cost, format: .currency(code: "USD"))")
+                Text("Your total is \(order.cost, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))")
                     .font(.title)
                 
                 Button("Place order", action: {})
