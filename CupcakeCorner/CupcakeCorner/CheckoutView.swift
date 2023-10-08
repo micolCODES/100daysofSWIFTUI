@@ -13,6 +13,7 @@ struct CheckoutView: View {
     
     @State private var confirmationMessage = ""
     @State private var showingConfirmation = false
+    @State private var showingFailAlert = false
     
     
     var body: some View {
@@ -46,6 +47,11 @@ struct CheckoutView: View {
         } message: {
             Text(confirmationMessage)
         }
+        .alert("Attempt failed!", isPresented: $showingFailAlert) {
+            Button("Try again") { }
+        } message: {
+            Text(confirmationMessage)
+        }
     }
         func placeOrder() async {
             guard let encoded = try? JSONEncoder().encode(order) else {
@@ -67,6 +73,8 @@ struct CheckoutView: View {
                 showingConfirmation = true
             } catch {
                 print("Checkout failed")
+                confirmationMessage = "OOPS, something went wrong 😳"
+                showingFailAlert = true
             }
     }
 }
