@@ -11,10 +11,29 @@ struct AddressView: View {
     @ObservedObject var order: Order
     
     var body: some View {
-        Text("Address View")
+        Form {
+            Section {
+                TextField("Name", text: $order.name)
+                TextField("Street Address", text: $order.street)
+                TextField("City", text: $order.city)
+                TextField("ZIP", text: $order.zip)
+            }
+            Section {
+                NavigationLink {
+                    CheckoutView(order: order)
+                } label: {
+                    Text("Check out")
+                }
+            }
+            .disabled(order.addressIsValid == false)
+        }
+        .navigationTitle("Delivery Details")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 #Preview {
-    AddressView(order: Order())
+    NavigationView {
+        AddressView(order: Order())
+    }
 }
