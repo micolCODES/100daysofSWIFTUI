@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B25137372AE2BEC100B77220 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25137362AE2BEC100B77220 /* RatingView.swift */; };
 		B29FAD2A2AD3100B00DD1DD1 /* BookwormApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29FAD292AD3100B00DD1DD1 /* BookwormApp.swift */; };
 		B29FAD2C2AD3100B00DD1DD1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29FAD2B2AD3100B00DD1DD1 /* ContentView.swift */; };
 		B29FAD2E2AD3100C00DD1DD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29FAD2D2AD3100C00DD1DD1 /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B25137362AE2BEC100B77220 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		B29FAD262AD3100B00DD1DD1 /* Bookworm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bookworm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B29FAD292AD3100B00DD1DD1 /* BookwormApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookwormApp.swift; sourceTree = "<group>"; };
 		B29FAD2B2AD3100B00DD1DD1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				B29FAD292AD3100B00DD1DD1 /* BookwormApp.swift */,
 				B29FAD2B2AD3100B00DD1DD1 /* ContentView.swift */,
 				B2FB5E9B2AE2B316003063AE /* AddBookView.swift */,
+				B25137362AE2BEC100B77220 /* RatingView.swift */,
 				B29FAD2D2AD3100C00DD1DD1 /* Assets.xcassets */,
 				B29FAD2F2AD3100C00DD1DD1 /* Preview Content */,
 			);
@@ -269,6 +272,7 @@
 				B29FAD2C2AD3100B00DD1DD1 /* ContentView.swift in Sources */,
 				B2F265CA2ADDAA440078629D /* DataController.swift in Sources */,
 				B2F265C82ADDA9F00078629D /* Bookworm.xcdatamodeld in Sources */,
+				B25137372AE2BEC100B77220 /* RatingView.swift in Sources */,
 				B29FAD2A2AD3100B00DD1DD1 /* BookwormApp.swift in Sources */,
 				B2FB5E9C2AE2B316003063AE /* AddBookView.swift in Sources */,
 			);
