@@ -13,6 +13,7 @@ struct AddBookView: View {
     
     @State private var title = ""
     @State private var author = ""
+    @State private var date = Date.now
     @State private var rating = 3
     @State private var genre = ""
     @State private var review = ""
@@ -25,6 +26,7 @@ struct AddBookView: View {
                 Section {
                     TextField("Title of Book", text: $title)
                     TextField("Author's Name", text: $author)
+                    DatePicker("Date", selection: $date, displayedComponents: .date)
                     
                     Picker("Genre", selection: $genre) {
                         ForEach(genres, id:\.self) {
@@ -32,6 +34,7 @@ struct AddBookView: View {
                         }
                     }
                 }
+                
                 Section {
                     TextEditor(text: $review)
                     RatingView(rating: $rating)
@@ -53,6 +56,7 @@ struct AddBookView: View {
                         dismiss()
                     }
                 }
+                .disabled(title.isEmpty || author.isEmpty || genre.isEmpty)
             }
             .navigationTitle("Add Book")
         }

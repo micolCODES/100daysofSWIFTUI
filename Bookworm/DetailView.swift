@@ -30,8 +30,16 @@ struct DetailView: View {
                     .offset(x: -5, y: -5)
             }
             
-            Text(book.author ?? "Unknown Author")
+            Text(book.title ?? "Unknown Title")
                 .font(.title)
+                .foregroundStyle(.black)
+            
+            Text(book.author ?? "Unknown Author")
+                .font(.headline)
+                .foregroundStyle(.black)
+            
+            Text(book.date ?? Date.now, format: .dateTime.year())
+                .font(.subheadline)
                 .foregroundStyle(.secondary)
             
             Text(book.review ?? "No Review")
