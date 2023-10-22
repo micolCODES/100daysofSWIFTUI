@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
+
+    @Environment(\.managedObjectContext) var moc
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        Button("Save") {
+            // only saving if there is something to save
+            if moc.hasChanges {
+                try? moc.save()
+            }
         }
-        .padding()
     }
 }
 
