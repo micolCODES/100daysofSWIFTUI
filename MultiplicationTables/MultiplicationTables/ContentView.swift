@@ -40,7 +40,7 @@ struct ContentView: View {
     
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 //setup View
                 VStack {
