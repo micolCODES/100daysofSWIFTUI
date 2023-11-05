@@ -18,7 +18,7 @@ struct ContentView: View {
     @State private var showingError = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
                 List {
                     Section {
                         TextField("Enter your word", text: $newWord)
