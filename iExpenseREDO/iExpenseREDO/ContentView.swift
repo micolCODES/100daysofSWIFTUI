@@ -12,7 +12,7 @@ struct ContentView: View {
     @State private var showAddView = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 ForEach(expenses.items){ item in
                     HStack {

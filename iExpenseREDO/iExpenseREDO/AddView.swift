@@ -19,7 +19,7 @@ struct AddView: View {
     var types = ["Personal", "Business"]
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 TextField("Name of expense", text: $name)
                 Picker("Type of expense", selection: $type) {
