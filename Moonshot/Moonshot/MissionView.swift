@@ -24,9 +24,7 @@ struct MissionView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: geometry.size.width * 0.6)
-                    
-                    
-                    
+                  
                     VStack(alignment: .leading) {
                         Rectangle()
                             .frame(height:2)
